@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<title>Desplaçaments - EAD Tarragona - Sala Jove Kesse</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,200&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+		<style>
+			html,
+			body {
+				/* Estils obligatoris per a que ScrollMagic funcioni bé */
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				/* Així aconseguim que els càlculs es facin sobre tota l'alçada de la finestra/viewport */
+				font-size: 62.5%;
+			}
+
+			h1 {
+				font: 400 8rem/9rem 'Inter', sans-serif;
+			} 
+
+			section {
+				text-align: center;
+				color: #EFEFEF;
+				position: relative;
+				overflow: hidden;
+			}
+
+			section div {
+				width: 100%;
+				text-align: left;
+			}
+
+			.pantalla-completa {
+				height: 100%;
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;
+			    flex-direction: column;
+			}
+
+			#outro div {
+				width: 700px;
+				margin: 0 auto;
+			}
+
+			.pantalla-nocompleta {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				max-width: 1920px;
+				margin: 0 auto;
+			}
+
+			.pantalla-nocompleta div {
+				text-align: left;
+			    display: flex;
+			    flex-direction: column;
+			    align-items: flex-end;
+			}
+
+			a {
+				animation: oscilar 3s 2s infinite ease-in-out;
+			}
+
+			a:hover {
+				color: #CA9AB1;
+				cursor: pointer;
+			}
+
+			.eadt,
+			.lloc_data {
+				position: absolute;
+			    left: 2rem;
+			    z-index: 100;
+			    width: 30%;
+			}
+
+			.eadt {
+			    top: 2rem;
+			}
+
+			.lloc_data {
+				bottom: 2rem;
+			}
+
+			.art_d {
+				width: 3000px;
+			}
+
+			#art_you_dos {
+				text-align: center;
+			}
+
+			#dos {
+				width: 120%;
+			}
+
+			.fons1 {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: url("svg/fons1.jpg") no-repeat center center;
+				background-size: cover;
+			}
+
+			.fons2 {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: url("svg/fons2.jpg") no-repeat center center;
+				background-size: cover;
+				opacity: 1;
+				transition: all 3s ease-out;
+			}
+
+			.aparicio {
+				opacity: 0;
+			}
+
+			.aparicio2 {
+				opacity: 1;
+			}
+
+			.gradient2 {
+				background-image:-webkit-radial-gradient(center, ellipse cover, #234523 0%,#eecc44 21%,#234566 55%);
+			}
+
+			.comisari {
+				align-items: baseline;
+			}
+			
+			.comisari h2,
+			.comisari h3,
+			.comisari p {
+				padding: 0 5rem;
+				width: 50%;
+			    margin-right: 0;
+			    margin-left: auto;
+			}
+
+			.comisari .rd {
+				width: 100%;
+				padding: 2.5rem 0;
+			}
+
+			.comisari .rd2 {
+				width: 50%;
+			    padding: 0 5rem 2.5rem;
+			}
+
+			.comisari p {
+				font: 300 2.2rem/3.1rem 'Inter', sans-serif;
+				color: black;
+				transition: all 0.3s;
+				margin-top: 0;
+			}
+
+			.comisari .cul {
+				margin-bottom: 15rem;
+			}
+
+			.comisari .subdestacat {
+				font: 300 1.8rem/2.3rem 'Inter', sans-serif;
+				margin-bottom: 9rem;
+			}
+
+			.comisari .destacat {
+				font: 200 3.8rem/5rem 'Inter', sans-serif;
+				margin-bottom: 9rem;
+			}
+
+			.comisari h2 {
+				font: 200 5.5rem/3rem 'IBM Plex Sans', sans-serif;
+				font-style: italic;
+				color: black;
+				margin-top: 9rem;
+			    margin-bottom: 0;
+			}
+
+			.pantalla-completa h2 {
+				font: 200 9rem/9rem 'IBM Plex Sans', sans-serif;
+				font-style: italic;
+				color: black;
+				margin-top: 9rem;
+			    margin-bottom: 0;
+			}
+
+			.comisari h2 .span1,
+			.pantalla-completa h2 .span1 {
+				animation: span1 10s infinite;
+			}
+
+			.comisari h2 .span2,
+			.pantalla-completa h2 .span2 {
+				animation: span2 10s infinite;
+			}
+
+			.comisari h2 .span3,
+			.pantalla-completa h2 .span3 {
+				animation: span3 10s infinite;
+			}
+
+			@keyframes span1 {
+			    50% {letter-spacing: 0.5rem;}
+			}
+
+			@keyframes span2 {
+			    50% {letter-spacing: 1rem;}
+			}
+
+			@keyframes span3 {
+			    50% {letter-spacing: 1.5rem;}
+			}
+
+			.comisari h3 {
+				font: 400 1.9rem/3rem 'Inter', sans-serif;
+				color: black;
+				padding-top: 0;
+			}
+
+			.logos img {
+			    position: absolute;
+			    width: 170px;
+			}
+
+			#ca {
+				bottom: 4rem;
+				left: 4rem;
+				width: 60px;
+			}
+
+			#po {
+				bottom: 4rem;
+				left: 4rem;
+				width: 380px;
+			}
+
+			#ea {
+				bottom: 4rem;
+				right: 4rem;
+				width: 480px;
+			}
+
+			#ta {
+				bottom: 4rem;
+				right: 4rem;
+				width: 220px;
+			}
+
+			#intro .fullscreen-bg__video {
+			    min-width: 100%;
+			    width: auto;
+			    height: auto;
+			}
+
+			.fullscreen-bg__video {
+			    width: 100%;
+			    //min-height: 100%;
+			 	padding: 2.5rem 0;
+			}
+
+			#img1 {
+			  z-index: -1;
+			}
+
+			.iphone {
+				height: 850px;
+			}
+
+			@media screen and (max-width:634px) {
+				html,
+				body {
+					font-size: 50%;
+					color: black;
+				}
+
+				.eadt,
+				.lloc_data {
+				    width: 75%;
+				}
+
+				.comisari {
+					display: block;
+					height: auto;
+				}
+
+				.comisari h2,
+				.comisari h3,
+				.comisari p {
+					padding: 2.8rem;
+					width: 90%;
+					margin: 0 auto;
+				}
+
+				.comisari h2 {
+					margin-top: 9rem;
+				}
+
+				.comisari h3 {
+					padding-top: 0;	
+				}
+
+				.comisari .rd2 {
+					width: 100%;
+					padding: 2.8rem 0;
+				}
+
+				#ta {
+					bottom: 12rem;
+					width: 50%;
+				}
+
+				#po {
+					bottom: 4rem;
+					left: 4rem;
+					width: 85%;
+				}
+
+				#ea {
+					top: 4rem;
+					left: 4rem;
+					width: 74%;
+				}
+
+				#ca {
+					width: 16%;
+				}
+
+				#outro {
+					background-size: 90%;
+				}
+
+				.iphone {
+					height: auto;
+				}
+
+				.pantalla-completa h2 {
+					font: 200 6rem/6rem 'IBM Plex Sans', sans-serif;
+				}
+
+				#outro div {
+					width: 90%;
+				}
+			}
+
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!--CDN link for  TweenMax-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/plugins/animation.gsap.min.js"></script>
+	</head>
+
+	<body>
+		<section class="pantalla-completa lila" id="intro">
+			<div class="eadt"><img src="svg/EADT.svg" alt="EAD Tarragona"></div>
+			<div class="lloc_data"><img src="svg/Lloc_data.svg" alt="Sala Jove Kesse. Del 3 al 31 de març de 2023"></div>
+			<div class="fons1"></div>
+			<div class="fons2"></div>
+			<div id="art_you">
+				<img class="art_d" id="uno" src="svg/desplaçaments.svg" alt="desplaçaments">
+			</div>
+		</section>
+		<section class="pantalla-nocompleta comisari">
+
+			<div>
+				<h2>Des<span class="span1">plaç</span><span class="span2">ame</span><span class="span3">nts</span></h2>
+				<h3>Rosa Díaz, Anna Munté i Isaïes Areny</h3>
+				<p class="subdestacat">Del 3 al 31 de març. Sala Jove Kesse.<br>Exposició de projectes finals del CFGS d'Arts aplicades al mur de l'EAD Tarragona</p>
+				<p class="destacat">Interpel·lar l'altre, fer del diàleg allò que en transforma i n'enriqueix. Amb aquest bagatge de nous aprenentatges generats per l'escolta, l'artista té el deure d'erigir imatges suggeridores per al públic. Imatges prou potents i prou obertes per a continuar eixamplant la conversa.</p>
+			<img class="rd" src="svg/rosa_diaz_1.jpg"  alt="Obra Foc i Vent de Rosa Díaz">
+				<p>En el primer projecte d'aquesta exposició, <strong>Rosa Díaz</strong> dona el protagonisme a la natura. Deixa que siguin els arbres cremats de la Conca de Barberà qui n'expliquin els incendis, l'erosió i les dificultats del futur d'aquest territori. L'obra que presenta a l'espectador transita entre una proposta inicial de dansa performativa de la mateixa natura i un resultat en format de dibuixos dignes d'Expressionisme abstracte nord-americà dels quals l'artista només és el propiciador.</p>
+			<img class="rd2 cul" src="svg/rosa_diaz_2.jpg" alt="Foc i Vent. Fotografies de l'acció artística">
+            <img class="rd" src="svg/fons1.jpg" alt="Unió del Comte amb el Pla. Obra d'Anna Mateu">
+				<p><strong>Anna Munté</strong>, en el segon projecte, estableix un viatge a través dels objectes del seu avi matern entesos com a portadors de memòria. La fotografia recuperada passa ser un objecte plàstic que l'artista fa dialogar amb la natura. Novament el territori com a protagonista.</p>
+<!-- 			<video class="fullscreen-bg__video rd2" preload="metadata" autoplay loop muted> 
+                <source src="svg/am-0.mp4#t=0.5" type="video/mp4"/> 
+                <source src="svg/am-0.webm#t=0.5" type="video/webm"/> 
+            </video> -->
+			<video class="fullscreen-bg__video rd2 cul" preload="metadata" controls> 
+                <source src="svg/video_anna_munte.mp4#t=0.5" type="video/mp4"/> 
+                <source src="svg/video_anna_munte.webm#t=0.5" type="video/webm"/> 
+            </video>
+            <img class="rd" src="svg/isa.jpg" alt="Exodus. Obra d'Isaïes Areny">
+				<p><strong>Isaïes Areny</strong> dona veu a les persones migrants que han lluitat per arribar a Europa en unes condicions dramàtiques i injustes. Relats que n'haurien de fer revisar la nostra identitat forjada en el benestar. Les converses d'Isaïes amb aquestes persones esdevenen la base de les seves pintures amb estètica d'art urbà, però que tenen tot un simbolisme sorgit dels trajectes i somnis relatats pels veritables protagonistes de la conversa.</p>
+			<video class="fullscreen-bg__video rd2 cul" preload="metadata" controls> 
+                <source src="svg/DECRYPTR-ART-EXODUS.mp4#t=146" type="video/mp4"/> 
+                <source src="svg/DECRYPTR-ART-EXODUS.webm#t=146" type="video/webm"/> 
+            </video>
+				<p>Cap d'aquests artistes ha fet un projecte on ells mateixos són els protagonistes. De fet, les imatges que proposen al públic gairebé tampoc són una obra seva, on en tot cas s'ha generat en la conversa i l'escolta amb l'altre. Tampoc plantegen una recerca estètica per ella mateixa. No hi ha un parlar per parlar. Cada u ha trobat una materialitat plàstica, una forma, amb la qual suggerir un debat obert a l'espectador, un diàleg sense narratives tancades ni alliçonaments. Cada u ha establert el seu compromís particular amb el qual significa la creació artística al s. XXI.</p>
+				<p>Aquesta exposició us presenta tres projectes de joves que han escollit formar-se a l'Escola d'Art i Disseny de la Diputació a Tarragona, concretament en el Cicle Formatiu de Grau Superior d'Arts aplicades al Mur / Pintura. Esperem que percebeu diversitat, debat i camins propis de cada alumne. Tots tres artistes han adquirit un compromís amb ells mateixos en optar per aquests estudis. Des de l'art, des de les imatges plàstiques i metafòriques volen expressar les preocupacions que caracteritzen cada moment històric.</p>
+				<p class="subdestacat"><strong>Francesc Perramon</strong><br>
+				Professor de l'EAD Tarragona</p>
+			<img class="rd" src="svg/els_tres.jpg" alt="Isaïes Areny, Rosa Díaz i Anna Mateu">
+			<img class="rd" src="svg/expo-1.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-2.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-3.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-4.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-5.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-6.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-7.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<img class="rd" src="svg/expo-8.jpg" alt="Fotografia de la inauguració de l'exposició">
+			<video class="fullscreen-bg__video iphone" preload="metadata" autoplay controls muted> 
+                <source src="svg/expo.mp4#t=0.5" type="video/mp4"/> 
+                <source src="svg/expo.webm#t=0.5" type="video/webm"/> 
+            </video>
+			</div>
+		</section>
+
+		<section class="pantalla-completa" id="outro">
+			<div>
+				<h2>Des<span class="span1">plaç</span><span class="span2">ame</span><span class="span3">nts</span></h2>
+			</div>
+			<div class="logos">
+				<img id="ca" src="svg/tarragonajove_logo_ng-1.png" alt="Tarragona Jove">
+			</div>
+			<div class="logos">
+				<a href="https://www.dipta.cat/eadt"><img id="ea" src="svg/logos-ea.svg" alt="Escola d'Art i Disseny de Tarragona i Diputació de Tarragona"></a>
+			</div>
+		</section>
+		<script>
+			$(document).ready(function(){
+				
+				var controller = new ScrollMagic.Controller();
+
+				var gradients = new ScrollMagic.Scene({
+					triggerElement: '.lila',
+					triggerHook: 0,
+					offset:100
+				})
+				.setClassToggle('.fons2', 'aparicio')
+				.addTo(controller);
+
+				var marquee = new TweenMax.fromTo('#art_you',1.5,
+					{css:{position: "absolute", left: "0"}},
+					{css:{position: "absolute", left: "-2600px"}}
+				);
+
+				var frasemarquee = new ScrollMagic.Scene({
+					triggerELement: '#intro',
+					duration: 1000,
+					triggerHook: 0
+				})
+				.setTween(marquee)
+				.addTo(controller);
+
+				// l'escena amb el pin
+				var escenapineada = new ScrollMagic.Scene({
+					triggerElement: '#intro',
+					duration: 1000,
+					triggerHook: 0
+				})
+				.setPin('#intro')
+				.addTo(controller);
+
+			});
+		</script>
+	</body>
+</html>
